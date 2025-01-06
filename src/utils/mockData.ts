@@ -5,7 +5,8 @@ export const DATA_PROJECTS = [
         startDate: "2025-01-01",
         endDate: "2026-01-01",
         projectManager: "John Doe",
-        description: ""
+        description: "",
+        isFavorite: true
     },
     {
         id: "project_b",
@@ -13,7 +14,8 @@ export const DATA_PROJECTS = [
         startDate: "2025-01-01",
         endDate: "2026-01-01",
         projectManager: "John Doe",
-        description: ""
+        description: "",
+        isFavorite: true
     },
     {
         id: "project_c",
@@ -21,7 +23,8 @@ export const DATA_PROJECTS = [
         startDate: "2025-01-01",
         endDate: "2026-01-01",
         projectManager: "John Doe",
-        description: ""
+        description: "",
+        isFavorite: false
     },
     {
         id: "project_d",
@@ -29,6 +32,7 @@ export const DATA_PROJECTS = [
         startDate: "2025-01-01",
         endDate: "2026-01-01",
         projectManager: "John Doe",
-        description: ""
+        description: "",
+        isFavorite: false
     },
 ]

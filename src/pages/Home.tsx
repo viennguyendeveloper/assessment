@@ -1,34 +1,30 @@
-import { useEffect, useState } from "react"
-import { DATA_PROJECTS } from "../utils/mockData"
+import { useEffect } from "react"
 import CustomButton from "../components/CustomButton"
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { fetchProjectsData } from "../utils/useApi";
 import { Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Box } from "@mui/system";
 import TableBody from '@mui/material/TableBody';
+import { useProjectContext } from "../hooks/useContext";
+import { Project } from "../types/globalTypes";
 
 const TABLE_COLUMN = ["Project ID", "Project Name", "Start Date", "End Date", "Project Manager", ""]
 
 
 function Home() {
     let navigate = useNavigate();
-    let location = useLocation()
-    const [dataProject, setDataProject] = useState<typeof DATA_PROJECTS[0][]>([])
+    const { projects, setProjects } = useProjectContext()
 
     useEffect(() => {
-        if (location.state) {
-            setDataProject(location.state)
-            return
-        }
-
         const fetchData = async () => {
             const res = await fetchProjectsData()
             if (res.ok) {
-                setDataProject(res.data)
+                setProjects(res.data)
             }
         }
         fetchData()
-    }, [location.state])
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <TableContainer component={Box}>
@@ -47,8 +43,10 @@ function Home() {
                         ))}
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {dataProject.map((row) => (
+                <TableBody sx={{
+                    background: "#fcfcfc"
+                }}>
+                    {projects.map((row: Project) => (
                         <TableRow
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -57,7 +55,7 @@ function Home() {
                                 position: "sticky",
                                 left: 0,
                                 zIndex: 10,
-                                background: "#fff",
+                                background: "#fcfcfc"
                             }}>
                                 {row.id}
                             </TableCell>
@@ -68,9 +66,7 @@ function Home() {
                             <TableCell align="right">
                                 <CustomButton
                                     onClick={() => {
-                                        navigate(`/edit-project/${row.id}`, {
-                                            state: dataProject
-                                        })
+                                        navigate(`/edit-project/${row.id}`)
                                     }}
                                     title="Edit" />
                             </TableCell>

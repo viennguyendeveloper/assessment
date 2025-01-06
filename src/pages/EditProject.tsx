@@ -6,13 +6,14 @@ import { fetchProjectById, updateProjectData } from "../utils/useApi";
 import { Project } from "../types/globalTypes";
 import { Alert, Snackbar, TextField, TextareaAutosize } from "@mui/material";
 
-const initialData = {
+const initialData: Project = {
     id: '',
     name: '',
     startDate: '',
     endDate: '',
     description: '',
     projectManager: '',
+    isFavorite: false
 }
 
 function EditProject() {
@@ -75,7 +76,7 @@ function EditProject() {
                 </div>
                 <div className="w-full flex">
                     <label className="w-1/5 text-right mr-5 truncate" htmlFor="project-desc">Description</label>
-                    <TextareaAutosize placeholder="Enter description" minRows={4} className="border p-1 flex-1" id="project-desc" name="description" value={formData?.description} onChange={handleChangeInput} />
+                    <TextareaAutosize placeholder="Enter description" minRows={4} className="border p-1 flex-1 border-custom-gray" id="project-desc" name="description" value={formData?.description} onChange={handleChangeInput} />
                 </div>
                 <div className="w-full flex">
                     <label className="w-1/5 text-right mr-5 " htmlFor="start-date">Start Date</label>

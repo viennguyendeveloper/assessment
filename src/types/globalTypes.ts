@@ -5,4 +5,5 @@ export type Project = {
     endDate: string,
     description: string,
     projectManager: string
+    isFavorite: boolean
 }
