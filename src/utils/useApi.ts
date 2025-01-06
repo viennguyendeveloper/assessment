@@ -11,32 +11,32 @@ export const updateProjectData = (data: Project): Promise<{ok: boolean, data: Pr
         const { id, name, startDate, endDate, projectManager } = data
 
         if(!id || !name || !startDate || !endDate || !projectManager)
-            return Promise.reject({ok: false, data: [], message: "Missing some field."})
+            return Promise.reject({ok: false, data: [], message: "Missing some fields!"})
         
         const idxProject = dataProjects.findIndex(project => project.id === data.id)
         if(idxProject === -1)
-            return Promise.reject({ok: false, data: [], message: "Project is not exist."})
+            return Promise.reject({ok: false, data: [], message: "Project not found!"})
 
         dataProjects[idxProject] = data
 
         return Promise.resolve({ok: true, message: "Update success.", data: dataProjects})
         
     } catch (error) {
-        return Promise.reject({ok: false, data: [], message: "Internal Server Error."})
+        return Promise.reject({ok: false, data: [], message: "Internal Server Error!"})
     }
 }
 
 export const fetchProjectById = (id: string | undefined): Promise<{ok: boolean, data?: Project, message: string}> => {
     try {
         const dataProjects = DATA_PROJECTS
-        if(!id) return Promise.reject({ok: false, message: "Missing id project."})
+        if(!id) return Promise.reject({ok: false, message: "Missing project id!"})
 
         const project = dataProjects.find(proj => proj.id === id)
 
-        if(!project) return Promise.reject({ok: false, message: "Project not exist."})
+        if(!project) return Promise.reject({ok: false, message: "Project not found!"})
         return Promise.resolve({ok: true, data: project, message: "Success."})
     } catch (error) {
-        return Promise.reject({ok: false, data: [], message: "Internal Server Error."})
+        return Promise.reject({ok: false, data: [], message: "Internal Server Error!"})
     }
 
 
