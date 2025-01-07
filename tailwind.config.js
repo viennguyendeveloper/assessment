@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "custom-gray": "rgba(0, 0, 0, 0.38)"
+        "black-23": "rgba(0, 0, 0, 0.23)",
+        "black-87": "rgba(0, 0, 0, 0.87)"
       }
     },
   },

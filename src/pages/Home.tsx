@@ -22,7 +22,8 @@ function Home() {
                 setProjects(res.data)
             }
         }
-        fetchData()
+        if(!projects.length)
+            fetchData()
         // eslint-disable-next-line
     }, [])
 

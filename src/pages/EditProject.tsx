@@ -5,6 +5,7 @@ import CustomButton from "../components/CustomButton";
 import { fetchProjectById, updateProjectData } from "../utils/useApi";
 import { Project } from "../types/globalTypes";
 import { Alert, Snackbar, TextField, TextareaAutosize } from "@mui/material";
+import { useProjectContext } from "../hooks/useContext";
 
 const initialData: Project = {
     id: '',
@@ -21,6 +22,7 @@ function EditProject() {
     let navigate = useNavigate()
     const [formData, setFormData] = useState<Project>(initialData)
     const [message, setMessage] = useState("")
+    const { setProjects } = useProjectContext()
 
     const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -28,10 +30,9 @@ function EditProject() {
             try {
                 const res = await updateProjectData(formData)
                 if (res.ok) {
+                    setProjects([...res.data])
                     setMessage(res.message)
-                    navigate("/", {
-                        state: res.data
-                    })
+                    navigate("/")
                 }
             } catch (error: any) {
                 setMessage(error.message)
@@ -76,7 +77,7 @@ function EditProject() {
                 </div>
                 <div className="w-full flex">
                     <label className="w-1/5 text-right mr-5 truncate" htmlFor="project-desc">Description</label>
-                    <TextareaAutosize placeholder="Enter description" minRows={4} className="border p-1 flex-1 border-custom-gray" id="project-desc" name="description" value={formData?.description} onChange={handleChangeInput} />
+                    <TextareaAutosize placeholder="Enter description" minRows={4} className="border p-1 flex-1 border-black-23 rounded py-[16.5px] px-[14px] hover:border-black-87" id="project-desc" name="description" value={formData?.description} onChange={handleChangeInput} />
                 </div>
                 <div className="w-full flex">
                     <label className="w-1/5 text-right mr-5 " htmlFor="start-date">Start Date</label>
